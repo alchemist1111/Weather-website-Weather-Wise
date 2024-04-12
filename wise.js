@@ -27,24 +27,30 @@ window.addEventListener("load",()=>{
     }
 })
 
-
+// Function to fetch weather data by city name
 function searchByCity(){
+    // Get the city name from the input field
     const place= document.getElementById('input').value;
+    // Construct the URL for fetching weather data based on the city name
     const urlsearch= `http://api.openweathermap.org/data/2.5/weather?q=${place}&` + `appid=${apikey}`;
 
+     // Fetch weather data from the API
     fetch(urlsearch).then((res)=>{
         return res.json();
     }).then((data)=>{
         console.log(data);
         weatherReport(data);
     })
+    // Clear the input field after searching
     document.getElementById('input').value='';
 }
 
+// Function to process and display weather report
 function weatherReport(data){
-
+ // Construct the URL for fetching weather forecast data based on the city name
     const urlcast= `http://api.openweathermap.org/data/2.5/forecast?q=${data.name}&` + `appid=${apikey}`;
 
+    // Fetch weather forecast data from the API
     fetch(urlcast).then((res)=>{
         return res.json();
     }).then((forecast)=>{
@@ -52,16 +58,19 @@ function weatherReport(data){
         hourForecast(forecast);
         dayForecast(forecast)
 
-        console.log(data);
+        console.log(data); // Display city name and country code
         document.getElementById('city').innerText= data.name + ', '+data.sys.country;
         console.log(data.name,data.sys.country);
     
+         // Display temperature
         console.log(Math.floor(data.main.temp-273));
         document.getElementById('temperature').innerText= Math.floor(data.main.temp-273)+ ' °C';
     
+         // Display weather description
         document.getElementById('clouds').innerText= data.weather[0].description;
         console.log(data.weather[0].description)
         
+        // Display weather icon
         let icon1= data.weather[0].icon;
         let iconurl= "http://api.openweathermap.org/img/w/"+ icon1 +".png";
         document.getElementById('img').src=iconurl
