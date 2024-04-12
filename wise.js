@@ -1,20 +1,26 @@
+// Define the API key
 const apikey="b5f599f8c8e7a3f0acfe42937732d3b1";
+// Execute when the window is fully loaded
 window.addEventListener("load",()=>{
+     // Check if geolocation is available
     if(navigator.geolocation){
+        // Get the current position
         navigator.geolocation.getCurrentPosition((position)=>{
+             // Extract latitude and longitude from the position
             let lon= position.coords.longitude;
             let lat= position.coords.latitude;
+            // Construct the URL for fetching weather data based on the current location
             const url= `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` + `lon=${lon}&appid=${apikey}`;
            
-
+            // Fetch weather data from the API
             fetch(url).then((res)=>{
                 return res.json();
             }).then((data)=>{
-                console.log(data);
-                console.log(new Date().getTime())
-                var dat= new Date(data.dt)
+                console.log(data); // Log the retrieved data
+                console.log(new Date().getTime())  // Log the current timestamp
+                const dat= new Date(data.dt) // Convert the timestamp from the data to local time
                 console.log(dat.toLocaleString(undefined,'AFRICA/NAIROBI'))
-                console.log(new Date().getMinutes())
+                console.log(new Date().getMinutes()) // Log the current minute
                 weatherReport(data);
             })
         })
