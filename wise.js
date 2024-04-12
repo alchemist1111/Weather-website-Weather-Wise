@@ -78,6 +78,7 @@ function weatherReport(data){
 
 }
 
+// Function to display hourly forecast
 function hourForecast(forecast){
     document.querySelector('.templist').innerHTML=''
     for (let i = 0; i < 5; i++) {
@@ -109,6 +110,7 @@ function hourForecast(forecast){
 }
 }
 
+// Function to display daily forecast
 function dayForecast(forecast){
     document.querySelector('.weekF').innerHTML=''
     for (let i = 8; i < forecast.list.length; i+=8) {
