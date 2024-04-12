@@ -38,6 +38,8 @@ Once you have obtained your API key, replace the apikey variable in the JavaScri
                          const apikey="your-api-key-here";
 
 
+## Live link
+https://alchemist1111.github.io/Weather-website-Weather-Wise/
 
 ## Credits
 This Weather App was created by Eugene Emoyo Ojakaa.
