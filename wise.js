@@ -1,7 +1,7 @@
 // Define the API key
 const apikey="b5f599f8c8e7a3f0acfe42937732d3b1";
 // Execute when the window is fully loaded
-window.addEventListener("load",()=>{
+window.addEventListener("DOMContentLoaded",()=>{
      // Check if geolocation is available
     if(navigator.geolocation){
         // Get the current position
