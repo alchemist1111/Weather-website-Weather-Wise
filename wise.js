@@ -1,7 +1,7 @@
 // Define the API key
 const apikey="b5f599f8c8e7a3f0acfe42937732d3b1";
 // Execute when the window is fully loaded
-window.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded",()=>{
      // Check if geolocation is available
     if(navigator.geolocation){
         // Get the current position
@@ -17,18 +17,18 @@ window.addEventListener("DOMContentLoaded",()=>{
                 return res.json();
             }).then((data)=>{
                 console.log(data); // Log the retrieved data
-                console.log(new Date().getTime())  // Log the current timestamp
+                console.log(new Date().getTime()); // Log the current timestamp
                 const dat= new Date(data.dt) // Convert the timestamp from the data to local time
-                console.log(dat.toLocaleString(undefined,'AFRICA/NAIROBI'))
-                console.log(new Date().getMinutes()) // Log the current minute
+                console.log(dat.toLocaleString(undefined,'AFRICA/NAIROBI'));
+                console.log(new Date().getMinutes()); // Log the current minute
                 weatherReport(data);
-            })
-        })
+            });
+        });
     }
-})
+});
 
 // Function to fetch weather data by city name
-function searchByCity(){
+function searchByCity() {
     // Get the city name from the input field
     const place= document.getElementById('input').value;
     // Construct the URL for fetching weather data based on the city name
@@ -43,7 +43,7 @@ function searchByCity(){
     })
     // Clear the input field after searching
     document.getElementById('input').value='';
-}
+};
 
 // Function to process and display weather report
 function weatherReport(data){
@@ -56,7 +56,7 @@ function weatherReport(data){
     }).then((forecast)=>{
         console.log(forecast.city);
         hourForecast(forecast);
-        dayForecast(forecast)
+        dayForecast(forecast);
 
         console.log(data); // Display city name and country code
         document.getElementById('city').innerText= data.name + ', '+data.sys.country;
@@ -68,47 +68,47 @@ function weatherReport(data){
     
          // Display weather description
         document.getElementById('clouds').innerText= data.weather[0].description;
-        console.log(data.weather[0].description)
+        console.log(data.weather[0].description);
         
         // Display weather icon
         let icon1= data.weather[0].icon;
         let iconurl= "http://api.openweathermap.org/img/w/"+ icon1 +".png";
-        document.getElementById('img').src=iconurl
-    })
+        document.getElementById('img').src=iconurl;
+    });
 
-}
+};
 
 // Function to display hourly forecast
 function hourForecast(forecast){
-    document.querySelector('.templist').innerHTML=''
+    document.querySelector('.templist').innerHTML='';
     for (let i = 0; i < 5; i++) {
 
-        const date= new Date(forecast.list[i].dt*1000)
-        console.log((date.toLocaleTimeString(undefined,'AFRICA/NAIROBI')).replace(':00',''))
+        const date= new Date(forecast.list[i].dt*1000);
+        console.log((date.toLocaleTimeString(undefined,'AFRICA/NAIROBI')).replace(':00',''));
 
         let hourR=document.createElement('div');
         hourR.setAttribute('class','next');
 
         let div= document.createElement('div');
         let time= document.createElement('p');
-        time.setAttribute('class','time')
+        time.setAttribute('class','time');
         time.innerText= (date.toLocaleTimeString(undefined,'AFRICA/NAIROBI')).replace(':00','');
 
         let temp= document.createElement('p');
         temp.innerText= Math.floor((forecast.list[i].main.temp_max - 273))+ ' °C' + ' / ' + Math.floor((forecast.list[i].main.temp_min - 273))+ ' °C';
 
-        div.appendChild(time)
-        div.appendChild(temp)
+        div.appendChild(time);
+        div.appendChild(temp);
 
         let desc= document.createElement('p');
-        desc.setAttribute('class','desc')
+        desc.setAttribute('class','desc');
         desc.innerText= forecast.list[i].weather[0].description;
 
         hourR.appendChild(div);
-        hourR.appendChild(desc)
+        hourR.appendChild(desc);
         document.querySelector('.templist').appendChild(hourR);
 }
-}
+};
 
 // Function to display daily forecast
 function dayForecast(forecast){
@@ -119,19 +119,19 @@ function dayForecast(forecast){
         div.setAttribute('class','dayF');
         
         let day= document.createElement('p');
-        day.setAttribute('class','date')
+        day.setAttribute('class','date');
         day.innerText= new Date(forecast.list[i].dt*1000).toDateString(undefined,'AFRICA/NAIROBI');
         div.appendChild(day);
 
         let temp= document.createElement('p');
         temp.innerText= Math.floor((forecast.list[i].main.temp_max - 273))+ ' °C' + ' / ' + Math.floor((forecast.list[i].main.temp_min - 273))+ ' °C';
-        div.appendChild(temp)
+        div.appendChild(temp);
 
         let description= document.createElement('p');
-        description.setAttribute('class','desc')
+        description.setAttribute('class','desc');
         description.innerText= forecast.list[i].weather[0].description;
         div.appendChild(description);
 
-        document.querySelector('.weekF').appendChild(div)
+        document.querySelector('.weekF').appendChild(div);
     }
 } 
