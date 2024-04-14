@@ -10,11 +10,12 @@ document.addEventListener("DOMContentLoaded",()=>{
             let lon= position.coords.longitude;
             let lat= position.coords.latitude;
             // Construct the URL for fetching weather data based on the current location
-            const url= `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` + `lon=${lon}&appid=${apikey}`;
+            const url= `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&` + `lon=${lon}&appid=${apikey}`;
            
             // Fetch weather data from the API
             fetch(url)
             .then((res)=>{
+                
                 return res.json();
             })
             .then((data)=>{
@@ -35,7 +36,7 @@ function searchByCity() {
     const place= document.getElementById('input').value;
     
     // Construct the URL for fetching weather data based on the city name
-    const urlsearch= `http://api.openweathermap.org/data/2.5/weather?q=${place}&` + `appid=${apikey}`;
+    const urlsearch= `https://api.openweathermap.org/data/2.5/weather?q=${place}&` + `appid=${apikey}`;
 
      // Fetch weather data from the API
     fetch(urlsearch)
@@ -54,7 +55,7 @@ function searchByCity() {
 // Function to process and display weather report
 function weatherReport(data){
  // Construct the URL for fetching weather forecast data based on the city name
-    const urlcast= `http://api.openweathermap.org/data/2.5/forecast?q=${data.name}&` + `appid=${apikey}`;
+    const urlcast= `https://api.openweathermap.org/data/2.5/forecast?q=${data.name}&` + `appid=${apikey}`;
 
     // Fetch weather forecast data from the API
     fetch(urlcast).then((res)=>{
@@ -78,7 +79,7 @@ function weatherReport(data){
         
         // Display weather icon
         let icon1= data.weather[0].icon;
-        let iconurl= "http://api.openweathermap.org/img/w/"+ icon1 +".png";
+        let iconurl= "https://api.openweathermap.org/img/w/"+ icon1 +".png";
         document.getElementById('img').src=iconurl;
     });
 
