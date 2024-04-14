@@ -31,14 +31,16 @@ document.addEventListener("DOMContentLoaded",()=>{
 function searchByCity() {
     // Get the city name from the input field
     const place= document.getElementById('input').value;
-    const btn = document.getElementById('search');
+    
     // Construct the URL for fetching weather data based on the city name
     const urlsearch= `http://api.openweathermap.org/data/2.5/weather?q=${place}&` + `appid=${apikey}`;
 
      // Fetch weather data from the API
-    fetch(urlsearch).then((res)=>{
+    fetch(urlsearch)
+    .then((res)=>{
         return res.json();
-    }).then((data)=>{
+    })
+    .then((data)=>{
         console.log(data);
         weatherReport(data);
     })
