@@ -25,12 +25,13 @@ document.addEventListener("DOMContentLoaded",()=>{
             });
         });
     }
-});
+})
 
 // Function to fetch weather data by city name
 function searchByCity() {
     // Get the city name from the input field
     const place= document.getElementById('input').value;
+    const btn = document.getElementById('search');
     // Construct the URL for fetching weather data based on the city name
     const urlsearch= `http://api.openweathermap.org/data/2.5/weather?q=${place}&` + `appid=${apikey}`;
 
@@ -43,7 +44,8 @@ function searchByCity() {
     })
     // Clear the input field after searching
     document.getElementById('input').value='';
-};
+
+}
 
 // Function to process and display weather report
 function weatherReport(data){
