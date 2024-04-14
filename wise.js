@@ -13,16 +13,18 @@ document.addEventListener("DOMContentLoaded",()=>{
             const url= `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&` + `lon=${lon}&appid=${apikey}`;
            
             // Fetch weather data from the API
-            fetch(url).then((res)=>{
+            fetch(url)
+            .then((res)=>{
                 return res.json();
-            }).then((data)=>{
+            })
+            .then((data)=>{
                 console.log(data); // Log the retrieved data
                 console.log(new Date().getTime()); // Log the current timestamp
-                const dat= new Date(data.dt) // Convert the timestamp from the data to local time
+                const dat= new Date(data.dt); // Convert the timestamp from the data to local time
                 console.log(dat.toLocaleString(undefined,'AFRICA/NAIROBI'));
                 console.log(new Date().getMinutes()); // Log the current minute
                 weatherReport(data);
-            });
+            })
         });
     }
 })
@@ -112,7 +114,7 @@ function hourForecast(forecast){
         hourR.appendChild(desc);
         document.querySelector('.templist').appendChild(hourR);
 }
-};
+}
 
 // Function to display daily forecast
 function dayForecast(forecast){
